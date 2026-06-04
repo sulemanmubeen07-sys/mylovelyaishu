@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Queen, Aisha</title>
+    <style>
+        /* Base Styling & Romantic Gradient Background */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(-45deg, #ff9a9e, #fecfef, #feada6, #f5f7fa);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #4a4a4a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Container for Content */
+        .container {
+            max-width: 600px;
+            width: 90%;
+            margin: 40px auto;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(255, 182, 193, 0.5);
+        }
+
+        /* Typography */
+        h1 {
+            color: #d63384;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-family: 'Georgia', serif;
+        }
+
+        h2 {
+            color: #ff4d6d;
+            font-size: 1.8rem;
+            margin-top: 30px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: #cc0052;
+        }
+
+        /* Message Boxes */
+        .love-note {
+            background: rgba(255, 240, 245, 0.9);
+            border-left: 5px solid #ff4d6d;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px 12px 12px 4px;
+            text-align: left;
+            font-style: italic;
+        }
+
+        /* Interactive Button */
+        .heart-btn {
+            background-color: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+            margin-top: 20px;
+        }
+
+        .heart-btn:hover {
+            transform: scale(1.05);
+            background-color: #ff2a55;
+        }
+
+        /* Floating Hearts Animation */
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 77, 109, 0.4);
+            transform: rotate(-45deg);
+            bottom: -50px;
+            animation: floatUp 10s linear infinite;
+        }
+
+        .heart::before, .heart::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 77, 109, 0.4);
+            border-radius: 50%;
+        }
+
+        .heart::before { top: -10px; left: 0; }
+        .heart::after { left: 10px; top: 0; }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(-45deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(-45deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating Background Hearts -->
+    <div class="hearts-container" id="hearts-box"></div>
+
+    <!-- Main Content Card -->
+    <div class="container">
+        <h1>To My Beautiful Aisha 💖</h1>
+        <p>There are a million ways to say this, but I wanted to build something special just to remind you of where you stand in my life.</p>
+        
+        <hr style="border: 0; height: 1px; background: linear-gradient(to right, rgba(0,0,0,0), rgba(255, 77, 109, 0.5), rgba(0,0,0,0)); margin: 25px 0;">
+
+        <h2>You Are My Everything</h2>
+        <p>
+            Aisha, from the very bottom of my heart, I want you to know that <span class="highlight">I love you more than everything else in this world</span>. 
+            You are my peace, my absolute favorite person, and the brightest part of every single day. No matter where life takes us or what challenges 
+            come our way, my heart belongs entirely to you.
+        </p>
+
+        <div class="love-note">
+            "You are the most adorable, cute, and stunning person I have ever known. Just the thought of your smile is enough to clear up the cloudiest days."
+        </div>
+
+        <h2>My Queen 👑</h2>
+        <p>
+            You aren't just a part of my life; you rule my heart. You carry yourself with so much grace, kindness, and beauty that calling you my Queen is the only thing that feels right. I promise to respect you, look after you, and protect your happiness always.
+        </p>
+
+        <!-- Dynamic Message Generator Button -->
+        <button class="heart-btn" onclick="revealMessage()">Click for a Secret Note</button>
+        <p id="secret-message" style="margin-top: 20px; font-weight: 500; color: #cc0052; min-height: 24px;"></p>
+    </div>
+
+    <script>
+        // Generating random floating hearts dynamically
+        const heartsBox = document.getElementById('hearts-box');
+        const heartCount = 15;
+
+        for (let i = 0; i < heartCount; i++) {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDelay = Math.random() * 8 + 's';
+            heart.style.animationDuration = (Math.random() * 6 + 6) + 's';
+            // Random scaling for depth
+            const scale = Math.random() * 0.6 + 0.4;
+            heart.style.transform = `scale(${scale}) rotate(-45deg)`;
+            heartsBox.appendChild(heart);
+        }
+
+        // Surprise Message Array
+        const messages = [
+            "Every single day, I fall for you all over again. 🌹",
+            "You have the prettiest eyes and the purest heart. ✨",
+            "I am so incredibly proud to have you by my side. 🤝",
+            "My favorite place in the world is wherever you are. 🌍",
+            "Thank you for being my constant, my love, and my queen. 👑"
+        ];
+
+        let lastIndex = -1;
+
+        function revealMessage() {
+            let randomIndex = Math.floor(Math.random() * messages.length);
+            
+            // Avoid showing the exact same message twice in a row
+            while (randomIndex === lastIndex) {
+                randomIndex = Math.floor(Math.random() * messages.length);
+            }
+            
+            lastIndex = randomIndex;
+            const messageElement = document.getElementById('secret-message');
+            messageElement.style.opacity = 0;
+            
+            setTimeout(() => {
+                messageElement.innerText = messages[randomIndex];
+                messageElement.style.transition = 'opacity 0.5s ease';
+                messageElement.style.opacity = 1;
+            }, 200);
+        }
+    </script>
+</body>
+</html>
